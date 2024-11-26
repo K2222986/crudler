@@ -5,20 +5,19 @@ import { useState } from 'react';
 
 import initialModules from '../../data/modules.js';
 
-const ModuleListScreen = () => {
+const ModuleListScreen = ({navigation}) => {
   // Initialisations ------------------
   const [modules, setModules] = useState(initialModules);
 
   // State ----------------------------
   // Handlers -------------------------
   const handleDelete = (module) => setModules(modules.filter((item) => item.ModuleID !== module.ModuleID));
-
-  const handleSelect = (module) => alert(`Item ${module.ModuleCode} selected`);
+  const handleSelect = (module) => navigation.navigate('ModuleViewScreen', { module } );
   
   // View -----------------------------
   return (
     <Screen>  
-      <ModuleList modules={modules} onSelect={handleDelete} />
+      <ModuleList modules={modules} onSelect={handleSelect} />
     </Screen>
   );
 }
